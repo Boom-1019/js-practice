@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery練習</title>
+
+    <style>
+        ul>li.active{
+            color: rgb(255, 0, 0);
+        }
+
+        #box{
+            width: 100px;
+            line-height: 100px;
+            background-color: lightblue;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <p>點按項目切換顏色</p>
+    <ul>
+        <li>01</li>
+        <li>02</li>
+        <li>03</li>
+        <li>04</li>
+    </ul>
+
+    <a id="btn-box-switch" href="javascript:;" >點選顯示/關閉盒子</a>
+    <div id="box">box</div>
+
+    <!--主程式 使用jquery-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    
+    <!--自定義-->
+    <script>
+        // $('ul>li').addClass('active')
+
+        $('ul>li').on('click',addRedText)
+
+        function addRedText(){
+            $(this).toggleClass('active')
+        //toggle切換開關//
+        }
+
+        $('#btn-box-switch').on('click',function(){
+            $('#box').toggle()
+            //toggle show和hide的切換//
+        })
+    </script>
+</body>
+</html>

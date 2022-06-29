@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+         *{
+            box-sizing: border-box;
+        }
+
+        .question-content{
+            border: 1px solid gray;
+            border-radius: 5px;
+            padding: 10px 8px;
+            line-height: 20px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        .question-content.active .answer{
+            display: block;
+        }
+        .question-content.active .icon-arrow{
+            transform: rotate(45deg);
+        }
+        .answer{
+            display: none;
+            margin-top: 10px;
+        }
+
+        .question{
+            position: relative;
+        }
+
+        .icon-arrow{
+            transition: transform .3s;
+            position: absolute;
+            width: 30px;
+            line-height: 30px;
+            text-align: center;
+            /* background-color: rgb(233, 209, 254); */
+            right: -5px;
+            top: -5px;
+        }
+
+
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div class="question-content">
+            <div class="question">一定要註冊帳號才能購物嗎？
+                <div class="icon-arrow"><i class="fa-solid fa-plus"></i></div>
+            </div>
+            <div class="answer">本網站需要註冊帳號才能進行購物，請至<a href="#">會員註冊</a>進行註冊。</div>
+        </div>
+        <div class="question-content">
+            <div class="question">q02
+                <div class="icon-arrow"><i class="fa-solid fa-plus"></i></div>
+            </div>
+            <div class="answer">a02</div>
+        </div>
+        <div class="question-content">
+            <div class="question">q03
+                <div class="icon-arrow"><i class="fa-solid fa-plus"></i></div>
+            </div>
+            <div class="answer">a03</div>
+        </div>
+        <div class="question-content">
+            <div class="question">q04
+                <div class="icon-arrow"><i class="fa-solid fa-plus"></i></div>
+            </div>
+            <div class="answer">a04</div>
+        </div>
+        <div class="question-content">
+            <div class="question">q05
+                <div class="icon-arrow"><i class="fa-solid fa-plus"></i></div>
+            </div>
+            <div class="answer">a05</div>
+        </div>
+    </div>
+
+    <!--主程式 使用jquery-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script>
+        $('.question-content').on('click', function(){
+            $(this).toggleClass('active')
+            $(this).siblings().removeClass('active')
+
+        })//.question-content end
+    </script>
+</body>
+</html>

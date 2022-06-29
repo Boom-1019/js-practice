@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>切換頁籤</title>
+    <style>
+        
+        .tab-link{
+            display: flex;
+        }
+        .tab-link>a{
+            text-decoration: none;
+            width: 32%;
+            margin: 1%;
+            display: block;
+            line-height: 40px;
+            text-align: center;
+            color: rgb(255, 255, 255);
+            background-color: rgb(127, 214, 255);
+        }
+        
+        .tab-link>a.active{
+            background-color: rgb(0, 153, 255);
+        }
+
+        .tab-content{
+            display: none;
+        }
+        .tab-content.active{
+            display: block;
+        }
+
+        .img-fluid{
+            width: 100%;
+        }
+
+        .container{
+            margin: auto;
+            width: 90%;
+            max-width: 1140px;
+        }
+    
+    </style>
+</head>
+
+
+<body>
+    <div class="tab-link">
+        <a href="#tab1" class="active">商品資訊</a>
+        <a href="#tab2">出價紀錄</a>
+        <a href="#tab3">問與答</a>
+    </div>
+
+<div class="container">
+    <div id="tab1" class="tab-content active">
+        <img  class="img-fluid" src="images/IMG_6661.JPG" alt="">
+        <p>日本書繪紙 DW PAPER 的特性是對於墨水有不錯的承受力，整體感很厚實，並且不會太重，鋼筆書寫的感受雖然輸給巴川紙，不過很適合會用各種筆類又不想使用薄紙的人使用，蓋印章的部分也巴川紙更好，除了 VERSA MAGIC 水滴印台之外，SHACHIHATA 傳統色印台也可以使用喔！
+        日本書繪紙 DW PAPER 的特性是對於墨水有不錯的承受力，整體感很厚實，並且不會太重，鋼筆書寫的感受雖然輸給巴川紙，不過很適合會用各種筆類又不想使用薄紙的人使用，蓋印章的部分也巴川紙更好，除了 VERSA MAGIC 水滴印台之外，SHACHIHATA 傳統色印台也可以使用喔！
+        日本書繪紙 DW PAPER 的特性是對於墨水有不錯的承受力，整體感很厚實，並且不會太重，鋼筆書寫的感受雖然輸給巴川紙，不過很適合會用各種筆類又不想使用薄紙的人使用，蓋印章的部分也巴川紙更好，除了 VERSA MAGIC 水滴印台之外，SHACHIHATA 傳統色印台也可以使用喔！
+        </p>
+    </div>
+    <div id="tab2" class="tab-content">
+        <ul>
+            <li>User01</li>
+            <li>User02</li>
+            <li>User03</li>
+            <li>User04</li>
+            <li>User01</li>
+            <li>User02</li>
+            <li>User03</li>
+            <li>User04</li>
+            <li>User01</li>
+            <li>User02</li>
+            <li>User03</li>
+            <li>User04</li>
+            <li>User01</li>
+            <li>User02</li>
+            <li>User03</li>
+            <li>User04</li>
+            <li>User01</li>
+            <li>User02</li>
+            <li>User03</li>
+            <li>User04</li>
+            <li>User01</li>
+            <li>User02</li>
+            <li>User03</li>
+            <li>User04</li>
+            <li>User01</li>
+            <li>User02</li>
+            <li>User03</li>
+            <li>User04</li>
+            <li>User01</li>
+            <li>User02</li>
+            <li>User03</li>
+            <li>User04</li>
+        </ul>
+    </div>
+    <div id="tab3" class="tab-content">
+        <img  class="img-fluid" src="images/IMG_7843.PNG" alt="">
+        <p>Don't worry. Be happy.</p>
+    </div>
+</div>
+    
+<!--主程式 使用jquery-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script>
+       $('.tab-link>a').on('click',function(e){
+        e.preventDefault()
+        $(this).addClass('active')
+        $(this).siblings().removeClass('active')
+        //^上方按鈕區塊的切換^//
+
+        $($(this).attr('href')).addClass('active')
+        $($(this).attr('href')).siblings().removeClass('active')
+       })//tab-link END
+        
+    </script>
+</body>
+</html>
