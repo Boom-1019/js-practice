@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide</title>
+    <style>
+        .parent{
+            /*可視範圍*/
+            width: 500px;
+            margin: auto;
+            overflow: hidden;
+            position: relative;
+        }
+        .child{
+            /*圖片寬X個數*/
+            width: 2000px;
+            /*去除行內空白，文字大小為0*/
+            font-size: 0;
+        }
+        .parent img{
+            /*寬同父層*/
+            width: 500px;
+            
+        }
+
+        .left-arrow,.right-arrow{
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.6);
+            width: 40px;
+            height: 100%;
+            font-size: 28px;
+            margin-bottom: 2px;
+            position: absolute;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+        }
+        .left-arrow{
+            left: 0;
+        }
+        .right-arrow{
+            right: 0;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="child">
+            <img src="images/IMG_6661.JPG" alt="">
+            <img src="images/IMG_7368.JPG" alt="">
+            <img src="images/IMG_7784.JPG" alt="">
+            <img src="images/IMG_8109.PNG" alt="">
+        </div>
+        <div class="left-arrow"><</div>
+        <div class="right-arrow">></div>
+    </div>
+    <!-- jquery主程式 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script>
+        let currentLeftNum = 0
+        $('.right-arrow').on('click',function(){
+            if(currentLeftNum==-1500){
+
+            }else{
+                // 每點一次箭頭會扣500
+                currentLeftNum = currentLeftNum - 500
+                console.log(currentLeftNum)
+                // 第二層 動畫 left位移一張圖片寬
+                $('.child').animate({'margin-left': currentLeftNum})
+
+            }
+        })// .right-arrow end
+
+        $('.left-arrow').on('click',function(){
+            if(currentLeftNum==0){
+                //假如currentLeftNum==0，執行這裡
+            }else{
+                //假如currentLeftNum!=0，執行這裡
+                // 每點一次箭頭會扣500
+                currentLeftNum = currentLeftNum + 500
+                // console.log(currentLeftNum)
+                // 第二層 動畫 left位移一張圖片寬
+                $('.child').animate({'margin-left': currentLeftNum})
+
+            }
+        })// .left-arrow end
+
+        
+    </script>
+</body>
+</html>

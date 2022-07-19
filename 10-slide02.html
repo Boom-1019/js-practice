@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide</title>
+    <style>
+        body{
+            margin: 0;
+            /* overflow-x: hidden; */
+        }
+        .parent{
+            /*可視範圍*/
+            /* width: 500px; */
+            width: 90%;
+            /* max-width: 600px; */
+            margin: auto;
+            overflow: hidden;
+            position: relative;
+        }
+        .child{
+            /*圖片寬X個數*/
+            /* width: 2000px;改到下面 */
+            /*去除行內空白，文字大小為0*/
+            font-size: 0;
+        }
+        .parent img{
+            /*寬同父層*/
+            width: 500px;
+            
+        }
+
+        .left-arrow,.right-arrow{
+            cursor: pointer;
+            /* background-color: rgba(255, 255, 255, 0.6); */
+            width: 40px;
+            height: 100%;
+            font-size: 28px;
+            margin-bottom: 2px;
+            position: absolute;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+        }
+        .left-arrow{
+            left: 0;
+        }
+        .right-arrow{
+            right: 0;
+        }
+
+        .indicator{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .indicator>li{
+            width: 10px;
+            height: 10px;
+            background-color: rgb(237, 244, 237);
+            border-radius: 50%;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .indicator>l:last-child{
+        margin-right: 0;
+        }
+        
+        .indicator>li.active{
+            background-color: green;
+        }
+        .loading-overlay{
+            position: fixed;
+            /* top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0; */
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            background-color: rgb(244, 255, 241);
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: .3s all;
+        }
+        
+        .loading-overlay.active{
+            top: -100vh;
+        }
+
+        .spinner {
+        width: 11.2px;
+        height: 11.2px;
+        border-radius: 11.2px;
+        box-shadow: 28px 0px 0 0 rgba(18,102,0,0.2), 22.7px 16.5px 0 0 rgba(18,102,0,0.4), 8.68px 26.6px 0 0 rgba(18,102,0,0.6), -8.68px 26.6px 0 0 rgba(18,102,0,0.8), -22.7px 16.5px 0 0 #126600;
+        animation: spinner-b87k6z 1.4s infinite linear;
+    }
+
+    @keyframes spinner-b87k6z {
+    to {
+        transform: rotate(360deg);
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="loading-overlay">
+        
+        <div class="spinner"></div>
+    </div>
+    <div class="parent">
+        <div class="child">
+            <img src="images/IMG_6661.JPG" alt="">
+            <img src="images/IMG_7368.JPG" alt="">
+            <img src="images/IMG_7784.JPG" alt="">
+            <img src="images/IMG_8109.PNG" alt="">
+        </div>
+        <div class="left-arrow"><</div>
+        <div class="right-arrow">></div>
+        <ol class="indicator">
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ol>
+    </div>
+    <!-- jquery主程式 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script>
+        
+        //第2層最前面補上(複製)最後一張圖
+        $('.child').prepend( $('.child>img').last().clone() )
+        //第2層最前面補上(複製)第二張圖(其實是第一張)
+        $('.child').append( $('.child>img').eq(1).clone() )
+
+        // let currentLeftNum = 0 //左邊位移的距離(0/-??)
+        let currentNum = 1 //當前的數字
+        let parentWidth = $('.parent').width() //父層寬
+        let imgLength = $('.child>img').length//子層(圖片)個數
+        let childTotalWidth = parentWidth * imgLength//父層寬*子層個數
+
+        
+        $('.child').css({'margin-left': -parentWidth * currentNum})//調整第二層一開始位移的位置
+        $('.child').width( childTotalWidth )//子層寬=父層寬*子層圖片個數(只讀一次)
+        $('.child>img').width( parentWidth ) //子層圖片寬 = 父層寬
+        
+        //蓋板loading
+        $(window).on('load',function(){
+            $('.loading-overlay').addClass('active')
+            parentWidth = $('.parent').width()
+            childTotalWidth = parentWidth * imgLength
+            $('.child').css({'margin-left': -parentWidth * currentNum})
+            $('.child').width( childTotalWidth )
+            $('.child>img').width( parentWidth )
+        })//window loading
+
+        //縮放時的變化
+        $(window).resize(function(){
+            parentWidth = $('.parent').width()
+            childTotalWidth = parentWidth * imgLength
+            $('.child').css({'margin-left': -parentWidth * currentNum})
+            $('.child').width( childTotalWidth )
+            $('.child>img').width( parentWidth )
+        })
+
+
+        $('.right-arrow').on('click',function(){
+            // console.log('外',currentNum)
+            if(currentNum==imgLength-1){//假如當前數字=圖片總數
+
+            }else{
+
+                currentNum = currentNum+1 //當前數字累加1
+                common()
+                // $('.child').animate({'margin-left':-parentWidth * (currentNum-1)})
+                // console.log('內',currentNum)
+            }
+        })// .right-arrow end
+
+        $('.left-arrow').on('click',function(){
+            // console.log('外',currentNum)
+            if(currentNum==0){
+                
+            }else{
+                currentNum = currentNum-1 //當前數字累加1
+                common()
+                // $('.child').animate({'margin-left': -parentWidth * (currentNum-1)})
+                // console.log('內',currentNum)
+            }
+        })// .left-arrow end
+
+
+        $('.indicator>li').on('click',function(){
+            // console.log('當前',currentNum)
+            // console.log('點擊的',$(this).index())//序列號
+            //index()序列號//
+            //eq()第幾個元素//
+            currentNum = $(this).index()+1//當前的數字=點擊序列+1//
+            common()
+            console.log($('.indicator>li').eq(0))
+            // $('.indicator>li').eq(currentNum-1).addClass('active')
+            // $('.indicator>li').eq(currentNum-1).siblings().removeClass('active')
+            //^圓圈按鈕的切換^//
+       })//indicator>li END
+
+
+       function common(){
+        
+        // $('.child').animate({'margin-left': -parentWidth * (currentNum)},callback)
+        $('.child').animate({'margin-left': -parentWidth * currentNum},function(){
+            //callback函式執行完後執行
+            //假如當前數字 = 總數-1
+            if(currentNum == imgLength-1){
+                currentNum = 1
+            }
+            if(currentNum==0){
+                currentNum = imgLength-2
+            }
+
+            //動畫結束後執行圓圈跳下一個//
+            $('.child').css({'margin-left': -parentWidth * currentNum})
+            console.log(currentNum)
+            $('.indicator>li').eq(currentNum-1).addClass('active')
+            $('.indicator>li').eq(currentNum-1).siblings().removeClass('active')
+            
+        })//callback END
+        
+       }//common() END
+
+       setInterval(function(){
+        $('.right-arrow').click()
+       },3000)
+
+       //圓圈
+    //    $('.indicator').each(function(){
+    //     $('')
+    //    })
+
+    </script>
+</body>
+</html>
